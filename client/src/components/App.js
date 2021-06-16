@@ -1,33 +1,31 @@
 import React from 'react'; 
 import {BrowserRouter,Route} from 'react-router-dom'; 
-// components 
-const PageOne = ()=>{
-    return <div>PageOnes</div>
-}
 
-const PageTwo = ()=>{
-    return(
-    
-        <div>
-            PageTwo
-            <button>click me </button>    
-        </div>
-    );
-}
+// import all components from Stream 
+import StreamList from './streams/StreamList';
+import StreamDelete from './streams/StreamDelete';
+import StreamCreate from  './streams/StreamCreate'; 
+import StreamShow from './streams/StreamShow';
+import StreamEdit from './streams/StreamEdit';
+import Header from './Header';
 
-
-
+// how Does route work 
 
 
 
 const App = ()=>{
     
     return(
-        <div>
+        <div className = "ui container">
+            
             <BrowserRouter>
               <div>
-                <Route path = "/" exact component = {PageOne} />
-                <Route path = "/pagetwo" component = {PageTwo} />
+                <Header />
+                <Route path = "/" exact component = {StreamList} />
+                <Route path = "/streams/new" exact component = {StreamCreate} />
+                <Route path = "/streams/edit" exact component = {StreamEdit} />
+                <Route path = "/streams/delete" exact component = {StreamDelete} />
+                <Route path = "/streams/show" exact component = {StreamShow} />
               </div>
             </BrowserRouter>
         </div>
