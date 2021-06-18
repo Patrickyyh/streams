@@ -4,8 +4,9 @@ import {Provider} from 'react-redux';
 import {createStore,applyMiddleware,compose} from 'redux';
 
 
-
+//
 import App from './components/App';
+// import reducers 
 import reducers from './reducers/index';
 
 
