@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import { fetchStreams } from '../../actions/index';
-
+import { Link } from 'react-router-dom'; 
 
 
 class StreamList extends React.Component{
@@ -17,9 +17,7 @@ renderDeletAndEdit(stream){
     if(stream.userId === this.props.currentUserId && !!this.props.currentUserId){
         return (
             <div className = "right floated content">
-                <button className = "ui button primary">
-                    Edit
-                </button>
+               <Link to = {`/streams/edit/${stream.id}`} className ="ui button primary">Edit</Link>
 
                 <button className = "ui button negative">
                     Delete
@@ -30,9 +28,30 @@ renderDeletAndEdit(stream){
         )
     }
 
+}
+
+
+
+// This helper function is responsible for rendering the create button 
+// Identify if the user is sign in or not 
+renderCreate(){
+    if(this.props.isSignedIn){
+        return (
+            <div style = {{textAlign: 'right'}}>
+                <Link to ="/streams/new" className = "ui button primary">
+                  Create a Stream  
+                </Link>
+            </div>
+        )
+    }
+
+
 
 }
     
+
+
+
 
 
  // render the list of video 
@@ -58,14 +77,13 @@ renderDeletAndEdit(stream){
 
 
     render(){
-       
-     
         return (
             <div>
                 <h2> Streams </h2>
                 <div className = "ui celled list">
                     {this.renderList()}
                 </div>
+                {this.renderCreate()}
             </div>
         );
 
@@ -78,7 +96,8 @@ const mapStateToProps = (state) =>{
     // adding the values of object into array to show the stream as the list 
     return {
         streams: Object.values(state.streams), 
-        currentUserId: state.auth.userId 
+        currentUserId: state.auth.userId,
+        isSignedIn: state.auth.isSignedIn, 
     }; 
 
 };

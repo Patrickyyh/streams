@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'; 
 import streams from '../apis/streams';
-
+import history from '../history';
 import { 
     SIGN_IN, 
     SIGN_OUT,
@@ -42,6 +42,13 @@ export const createStream = (formValues) =>
         // create stream api request 
         const response = await streams.post('/streams',{...formValues,userId}); 
         dispatch({type: CREATE_STREAM, payload: response.data});
+
+
+        // Do some programmatic navigation
+        // get the user back to the root route 
+        history.push('/'); 
+
+
     };
 
 }
@@ -70,10 +77,18 @@ export const fetchStream = (id)=>{
 // update 
 export const editStream = (id,formvalues)=>{
 
+    console.log(formvalues); 
     return async(dispatch) =>{
-        const response = await streams.put(`/streams/${id}`, formvalues);
+        // since we only wanna update the part of the properties
+        // So we make use of the patch over here 
+        const response = await streams.patch(`/streams/${id}`, formvalues);
         dispatch({type: EDIT_STREAM , payload: response.data}); 
+        // return the streamList page
+        history.push('/'); 
     }
+
+
+    
 
 }
 
