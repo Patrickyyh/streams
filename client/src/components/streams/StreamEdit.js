@@ -8,6 +8,7 @@ import _ from 'lodash';
 
  
 class StreamEdit extends React.Component{
+    // fetch data 
     componentDidMount(){
         this.props.fetchStream(this.props.match.params.id);
     }
