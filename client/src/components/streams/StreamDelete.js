@@ -22,6 +22,7 @@ class StreamDelete extends React.Component{
                 <button onClick = {() => this.props.deleteStream(id)} className = "ui button negative">Delete</button>
                 <Link to = "/" className = "ui button">Cancel</Link>
             </React.Fragment>
+            
        );
     
 
@@ -45,10 +46,12 @@ class StreamDelete extends React.Component{
                 content = {this.renderContent()}
                 actions = {this.renderActions()}
                 onDismiss = {()=>history.push('/')}
+                
             /> 
        
     )
   };
+
 }
 
 const mapStateToProps = (state, ownProps) => {
